@@ -12,7 +12,7 @@ public class Controller extends VBox
     public TextArea primaryTextArea;
     public VBox primaryVBox;
 
-    public boolean isFirstLine = true;
+    private boolean isFirstLine = true;
 
     public void handleButtonClick()
     {
