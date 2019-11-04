@@ -3,6 +3,8 @@ package gravastar.view;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 
 public class Controller extends VBox
@@ -10,7 +12,6 @@ public class Controller extends VBox
     public Button domsButton;
     public TextField commandBar;
     public TextArea primaryTextArea;
-    public VBox primaryVBox;
 
     private boolean isFirstLine = true;
 
