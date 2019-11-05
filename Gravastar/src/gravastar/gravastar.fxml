@@ -68,7 +68,20 @@
       </VBox>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1">
         <tabs>
-          <Tab text="Inventory" />
+          <Tab text="Inventory">
+               <content>
+                  <TilePane fx:id="invTilePane" hgap="5.0" prefColumns="4" prefHeight="200.0" prefRows="4" prefWidth="200.0" vgap="5.0">
+                     <children>
+                        <Rectangle fx:id="awesomeRect1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </TilePane>
+               </content></Tab>
           <Tab text="Ciphers" />
         </tabs>
       </TabPane>
