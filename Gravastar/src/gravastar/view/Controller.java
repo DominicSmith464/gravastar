@@ -8,12 +8,13 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.TextFlow;
 
 public class Controller extends VBox
 {
     public Button domsButton, newButt;
     public TextField commandBar;
-    public TextArea primaryTextArea;
+    public TextFlow primaryTextArea;
     public TilePane invTilePane;
     public Rectangle awesomeRect1;
 
