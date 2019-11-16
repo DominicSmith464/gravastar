@@ -6,6 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import gravastar.view.*;
+import java.util.ArrayList;
+
 public class Main extends Application
 {
 
@@ -17,6 +20,12 @@ public class Main extends Application
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
+        ArrayList<String> myList = new ArrayList();
+        myList.addAll(javafx.scene.text.Font.getFamilies());
+        for(String fontName : myList)
+        {
+            System.out.println(fontName);
+        }
     }
 
 
