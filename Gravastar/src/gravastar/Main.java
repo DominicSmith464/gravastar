@@ -17,9 +17,10 @@ public class Main extends Application
     {
         Parent root = FXMLLoader.load(getClass().getResource("gravastar.fxml"));
         primaryStage.setTitle("Gravastar");
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(new Scene(root, 1074, 600));
         primaryStage.setResizable(false);
         primaryStage.show();
+
         ArrayList<String> myList = new ArrayList();
         myList.addAll(javafx.scene.text.Font.getFamilies());
         for(String fontName : myList)
