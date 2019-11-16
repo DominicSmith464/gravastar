@@ -1,20 +1,21 @@
 package gravastar.view;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 public class Controller extends VBox
 {
     public Button domsButton, newButt;
     public TextField commandBar;
-    public TextFlow primaryTextArea;
+    public TextFlow primaryTextFlow;
     public TilePane invTilePane;
     public Rectangle awesomeRect1;
 
@@ -36,7 +37,11 @@ public class Controller extends VBox
 
     public void handleCommandEntered()
     {
-        primaryTextArea.appendText("> " + commandBar.getText() + "\n");
+        Text text1 = new Text("> " + commandBar.getText() + "\n");
+        text1.setFill(Color.AQUA);
+        text1.setFont(Font.font("Verdana", 25));
+        primaryTextFlow.getChildren().add(text1);
+                //("> " + commandBar.getText() + "\n");
         commandBar.setText("");
     }
 }

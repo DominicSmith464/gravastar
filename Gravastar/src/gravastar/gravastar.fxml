@@ -13,7 +13,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<GridPane alignment="CENTER" prefHeight="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gravastar.view.Controller">
+<GridPane alignment="CENTER" minHeight="600.0" minWidth="1082.0" prefHeight="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gravastar.view.Controller">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="1054.0" minWidth="10.0" prefWidth="856.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="816.0" minWidth="10.0" prefWidth="226.0" />
@@ -22,7 +22,7 @@
       <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <VBox fx:id="primaryVBox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="857.0">
+      <VBox fx:id="primaryVBox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="857.0" GridPane.valignment="TOP">
          <children>
             <MenuBar>
               <menus>
@@ -43,14 +43,21 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <TextFlow prefHeight="200.0" prefWidth="200.0">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
+            <ScrollPane prefHeight="525.0" prefViewportHeight="200.0" prefViewportWidth="837.0" prefWidth="837.0">
+               <content>
+                  <TextFlow fx:id="primaryTextFlow" prefHeight="187.0" prefWidth="834.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </TextFlow>
+               </content>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
-            </TextFlow>
+            </ScrollPane>
             <TextField fx:id="commandBar" onAction="#handleCommandEntered" promptText="Enter a command...">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" />
@@ -62,6 +69,9 @@
                </VBox.margin>
             </Button>
          </children>
+         <padding>
+            <Insets top="4.0" />
+         </padding>
       </VBox>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1">
         <tabs>
