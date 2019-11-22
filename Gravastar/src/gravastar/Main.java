@@ -21,12 +21,7 @@ public class Main extends Application
         primaryStage.setResizable(false);
         primaryStage.show();
 
-        ArrayList<String> myList = new ArrayList();
-        myList.addAll(javafx.scene.text.Font.getFamilies());
-        for(String fontName : myList)
-        {
-            System.out.println(fontName);
-        }
+
     }
 
 

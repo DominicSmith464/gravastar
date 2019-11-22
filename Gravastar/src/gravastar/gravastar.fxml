@@ -39,7 +39,7 @@
             </MenuBar>
             <ScrollPane fx:id="primaryScrollPane" focusTraversable="false" hbarPolicy="NEVER" pannable="true" prefHeight="525.0" prefViewportHeight="200.0" prefViewportWidth="837.0" prefWidth="837.0">
                <content>
-                  <TextFlow fx:id="primaryTextFlow" prefHeight="459.0" prefWidth="837.0" style="-fx-background-color: BLUE;">
+                  <TextFlow fx:id="primaryTextFlow" prefHeight="459.0" prefWidth="837.0" style="-fx-background-color: PURPLE;">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

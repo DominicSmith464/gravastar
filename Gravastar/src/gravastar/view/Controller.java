@@ -13,6 +13,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
+import java.util.ArrayList;
+
 
 public class Controller extends VBox
 {
@@ -42,21 +44,22 @@ public class Controller extends VBox
 
     public void handleCommandEntered()
     {
-        Text text1 = new Text("> " + commandBar.getText() + "\n");
+        Text t = new Text("> " + commandBar.getText() + "\n");
+
         if(isRed)
         {
-            text1.setFill(Color.RED);
+            t.setFill(Color.RED);
             isRed = false;
         }
         else
         {
-            text1.setFill(Color.AQUA);
+            t.setFill(Color.AQUA);
             isRed = true;
         }
 
-        text1.setFont(Font.font("Comic Sans MS", 25));
-        primaryTextFlow.getChildren().add(text1);
-                //("> " + commandBar.getText() + "\n");
+        t.setFont(Font.font("Harlow Solid Italic", 25));
+        primaryTextFlow.getChildren().add(t);
+
         commandBar.setText("");
         primaryScrollPane.setVvalue(primaryScrollPane.getVmax());
     }
