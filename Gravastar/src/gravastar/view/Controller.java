@@ -12,7 +12,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-
+import gravastar.commandflow.*;
 import java.util.ArrayList;
 
 
@@ -42,10 +42,13 @@ public class Controller extends VBox
         awesomeRect1.setFill(redPaint);
     }
 
+    //Handles commands entered in the text printing context
     public void handleCommandEntered()
     {
-        Text t = new Text("> " + commandBar.getText() + "\n");
-
+        String input = commandBar.getText();
+        Text t = new Text("> " + input + "\n");
+        t.setFill(Color.WHITE);
+        /*
         if(isRed)
         {
             t.setFill(Color.RED);
@@ -55,12 +58,25 @@ public class Controller extends VBox
         {
             t.setFill(Color.AQUA);
             isRed = true;
-        }
+        }*/
 
-        t.setFont(Font.font("Harlow Solid Italic", 25));
+        t.setFont(Font.font("Eras Medium ITC", 25));
         primaryTextFlow.getChildren().add(t);
 
         commandBar.setText("");
+        primaryScrollPane.setVvalue(primaryScrollPane.getVmax());
+
+        StateHandler.updateState(input, this);
+    }
+
+    public void normalPrintln(String myText)
+    {
+        Text t = new Text(myText);
+        t.setFill(Color.WHITE);
+        t.setFont(Font.font("Eras Medium ITC", 25));
+        t.setText(t.getText() + "\n");
+
+        primaryTextFlow.getChildren().add(t);
         primaryScrollPane.setVvalue(primaryScrollPane.getVmax());
     }
 }

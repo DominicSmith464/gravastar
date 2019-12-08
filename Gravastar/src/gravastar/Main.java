@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import gravastar.commandflow.*;
 import gravastar.view.*;
 import java.util.ArrayList;
 
@@ -20,8 +21,6 @@ public class Main extends Application
         primaryStage.setScene(new Scene(root, 1074, 600));
         primaryStage.setResizable(false);
         primaryStage.show();
-
-
     }
 
 
