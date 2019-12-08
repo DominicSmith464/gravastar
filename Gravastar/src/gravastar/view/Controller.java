@@ -35,6 +35,7 @@ public class Controller extends VBox
         newButt = new Button("Hi");
         invTilePane.getChildren().add(/*awesomeRect1*/newButt);
         //newButt.addEventHandler();
+        primaryScrollPane.setVvalue(1.0);
     }
 
     public void handleRectClicked()
@@ -64,9 +65,12 @@ public class Controller extends VBox
         primaryTextFlow.getChildren().add(t);
 
         commandBar.setText("");
-        primaryScrollPane.setVvalue(primaryScrollPane.getVmax());
 
         StateHandler.updateState(input, this);
+
+        //Scrolls to the bottom
+        primaryTextFlow.heightProperty().addListener(observable -> primaryScrollPane.setVvalue(1D));
+
     }
 
     public void normalPrintln(String myText)
@@ -74,9 +78,8 @@ public class Controller extends VBox
         Text t = new Text(myText);
         t.setFill(Color.WHITE);
         t.setFont(Font.font("Eras Medium ITC", 25));
-        t.setText(t.getText() + "\n");
+        t.setText(t.getText() + "\n\n\n\n\n\n");
 
         primaryTextFlow.getChildren().add(t);
-        primaryScrollPane.setVvalue(primaryScrollPane.getVmax());
     }
 }

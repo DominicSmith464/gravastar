@@ -19,6 +19,7 @@ public class WordParsing
                 //If you are at the last word
                 if(i == phrase.length() - 1)
                 {
+                    word.append(phrase.charAt(i));
                     words.add(word.toString());
                 }
                 //If you are not finished with a word
@@ -33,6 +34,11 @@ public class WordParsing
                 words.add(word.toString());
                 word.delete(0, word.length());
             }
+        }
+
+        if(words.size() == 0)
+        {
+            words.add("");
         }
 
         return words;
@@ -51,13 +57,16 @@ public class WordParsing
         return filterWords;
     }
 
-    public static Command stringToCommand(String s)
+    public static Command stringToCommand(String phrase)
     {
         for(Command c : Command.values())
         {
-            if(s.equals(c.toString()))
+            for(int i = 0; i < c.numAliases(); i++)
             {
-                return c;
+                if(phrase.equals(c.getAliases()[i]))
+                {
+                    return c;
+                }
             }
         }
 

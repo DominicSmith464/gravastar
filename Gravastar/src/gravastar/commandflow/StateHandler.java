@@ -22,12 +22,25 @@ public class StateHandler {
     private static void parseInput(String input)
     {
         UserInput u = new UserInput(inputNumber);
+        Command c = Command.invalid;
+
         inputNumber++;
 
         wordList = WordParsing.filterInput(WordParsing.splitIntoWords(input));
 
-        //find command
-        u.setUserCommand(WordParsing.stringToCommand(wordList.get(0)));
+        //Send the first two words first
+        if(wordList.size() > 1)
+        {
+            c = WordParsing.stringToCommand(wordList.get(0) + " " + wordList.get(1));
+        }
+
+        //Command was not two words long
+        if(c == Command.invalid)
+        {
+            c = WordParsing.stringToCommand(wordList.get(0));
+        }
+
+        u.setUserCommand(c);
 
         //find item
         u.setItemId(1);
