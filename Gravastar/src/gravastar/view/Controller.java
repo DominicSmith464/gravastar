@@ -26,7 +26,6 @@ public class Controller extends VBox
     public ScrollPane primaryScrollPane;
 
     private Paint redPaint = Paint.valueOf("red");
-    private boolean isRed = false;
 
     public void handleButtonClick()
     {
@@ -35,7 +34,6 @@ public class Controller extends VBox
         newButt = new Button("Hi");
         invTilePane.getChildren().add(/*awesomeRect1*/newButt);
         //newButt.addEventHandler();
-        primaryScrollPane.setVvalue(1.0);
     }
 
     public void handleRectClicked()
@@ -48,18 +46,7 @@ public class Controller extends VBox
     {
         String input = commandBar.getText();
         Text t = new Text("> " + input + "\n");
-        t.setFill(Color.WHITE);
-        /*
-        if(isRed)
-        {
-            t.setFill(Color.RED);
-            isRed = false;
-        }
-        else
-        {
-            t.setFill(Color.AQUA);
-            isRed = true;
-        }*/
+        t.setFill(Color.YELLOWGREEN);
 
         t.setFont(Font.font("Eras Medium ITC", 25));
         primaryTextFlow.getChildren().add(t);
@@ -69,7 +56,7 @@ public class Controller extends VBox
         StateHandler.updateState(input, this);
 
         //Scrolls to the bottom
-        primaryTextFlow.heightProperty().addListener(observable -> primaryScrollPane.setVvalue(1D));
+        primaryTextFlow.heightProperty().addListener(observable -> primaryScrollPane.setVvalue(1.0));
 
     }
 
@@ -78,8 +65,28 @@ public class Controller extends VBox
         Text t = new Text(myText);
         t.setFill(Color.WHITE);
         t.setFont(Font.font("Eras Medium ITC", 25));
-        t.setText(t.getText() + "\n\n\n\n\n\n");
+        t.setText(t.getText() + "\n");
 
         primaryTextFlow.getChildren().add(t);
+    }
+
+    public void colorPrintln(String[] phraseList, Paint[] colors)
+    {
+        Text[] texts = new Text[phraseList.length];
+
+        for(int i = 0; i < phraseList.length; i++)
+        {
+            texts[i] = new Text(phraseList[i]);
+            texts[i].setFill(colors[i]);
+            texts[i].setFont(Font.font("Eras Medium ITC", 25));
+            primaryTextFlow.getChildren().add(texts[i]);
+        }
+
+        normalPrintln("");
+    }
+
+    public void clearTextFlow()
+    {
+        primaryTextFlow.getChildren().clear();
     }
 }

@@ -2,6 +2,8 @@ package gravastar.commandflow;
 
 import gravastar.helpers.WordParsing;
 import gravastar.view.Controller;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 import java.util.ArrayList;
 
@@ -14,9 +16,17 @@ public class StateHandler {
     public static void updateState(String input, Controller window)
     {
         parseInput(input);
-        window.normalPrintln("You just did the " +
-                inputs.get(inputNumber - 1).getUserCommand().toString() +
-                " command.");
+
+        if(inputs.get(inputNumber - 1).getUserCommand() == Command.clear)
+        {
+            window.clearTextFlow();
+        }
+
+        window.colorPrintln(new String[] {"You just did the ",
+                inputs.get(inputNumber - 1).getUserCommand().toString(),
+                " command."}, new Paint[] {Color.WHITE, Color.RED, Color.WHITE});
+
+        window.normalPrintln("");
     }
 
     private static void parseInput(String input)
