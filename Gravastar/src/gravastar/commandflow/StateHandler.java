@@ -1,5 +1,6 @@
 package gravastar.commandflow;
 
+import gravastar.characters.Player;
 import gravastar.helpers.WordParsing;
 import gravastar.view.Controller;
 import javafx.scene.paint.Color;
@@ -9,58 +10,132 @@ import java.util.ArrayList;
 
 public class StateHandler {
 
+    private static ArrayList<String> wordList = new ArrayList<>();
+    private static ArrayList<UserInput> inputHistory = new ArrayList<>();
+    private static Query queryType;
+    private static Gamestate state;
     private static int inputNumber = 0;
-    private static ArrayList<String> wordList = new ArrayList<String>();
-    private static ArrayList<UserInput> inputs = new ArrayList<UserInput>();
 
     public static void updateState(String input, Controller window)
     {
-        parseInput(input);
-
-        if(inputs.get(inputNumber - 1).getUserCommand() == Command.clear)
+        switch (state)
         {
-            window.clearTextFlow();
+            case initialize:
+                window.normalPrintln(
+                        "Welcome to Gravastar! \n" +
+                                "Hope you find your way...\n" +
+                                "\n" +
+                                "What is your name?");
+                queryType = Query.textResponse;
+                break;
+
+            case normal:
+                window.normalPrintln("You are in the cafeteria.\n");
+                queryType = Query.standard;
+                break;
         }
 
-        window.colorPrintln(new String[] {"You just did the ",
-                inputs.get(inputNumber - 1).getUserCommand().toString(),
-                " command."},
-                new Paint[] {Color.WHITE,
-                        Color.RED,
-                        Color.WHITE});
+        switch (queryType)
+        {
+            case standard:
+                parseInput(input);
+                break;
 
-        window.colorPrintln(new String[] {"I think you said ", wordList.get(0)}, new Paint[] {Color.WHITE, Color.BLUE});
+            case textResponse:
+                //TODO: text only
+                break;
 
-        window.normalPrintln("");
+            case itemElaboration:
+                //TODO: name an item
+                break;
+
+            default:
+                parseInput(input);
+                break;
+        }
+
+        switch (state)
+        {
+            case initialize:
+                Player.setName();
+                break;
+
+            default:
+                //TODO: Send the command through the ringer
+                break;
+        }
+
+        /*
+
+                String userCommandString;
+                userCommandString = inputHistory.get(inputNumber - 1).getUserCommand().toString();
+
+                window.colorPrintln(
+                        new String[] {
+                            "You just did the ",
+                            userCommandString,
+                            " command."},
+                        new Paint[] {
+                            Color.WHITE,
+                            Color.RED,
+                            Color.WHITE});
+
+                window.colorPrintln(
+                        new String[] {
+                                "I think you said ",
+                                wordList.get(0)},
+                        new Paint[] {
+                                Color.WHITE,
+                                Color.BLUE});
+
+                window.normalPrintln("");
+
+        */
     }
 
+    /* This is the most basic input parser. It takes the text
+     * that the user entered and converts it to a UserInput
+     * object. This method is used when the player is expected
+     * to provide a verb and an item.
+     * TODO: If the command called does not require an item, the item part is skipped.
+     */
     private static void parseInput(String input)
     {
-        UserInput u = new UserInput(inputNumber);
-        Command c = Command.invalid;
+        /* A UserInput is a condensed form of the text
+         that the player puts into the entry bar.*/
+        UserInput userInputU = new UserInput(inputNumber);
+        Command commandC = Command.invalid;
 
+        //Adds the UserInput to the history list
+        inputHistory.add(userInputU);
+
+        //Increment the entry number for user inputs
         inputNumber++;
 
-        wordList = WordParsing.filterInput(WordParsing.splitIntoWords(input));
+        /* Takes a string and turns it into a list of useful words.
+        *  It also sanitizes the input, trimming spaces and making
+        * everything lowercase. */
+        wordList = WordParsing.filterInput(WordParsing.splitIntoWords(input.toLowerCase().trim()));
 
-        //Send the first two words first
+        //Send the first two words first to check for two word commands
         if(wordList.size() > 1)
         {
-            c = WordParsing.stringToCommand(wordList.get(0) + " " + wordList.get(1));
+            commandC = WordParsing.stringToCommand(wordList.get(0) + " " + wordList.get(1));
         }
 
-        //Command was not two words long
-        if(c == Command.invalid)
+        //Command was not two words long, check for a one word command
+        if(commandC == Command.invalid)
         {
-            c = WordParsing.stringToCommand(wordList.get(0));
+            commandC = WordParsing.stringToCommand(wordList.get(0));
         }
 
-        u.setUserCommand(c);
+        //Set the command for the UserInput
+        userInputU.setUserCommand(commandC);
 
         //find item
-        u.setItemId(1);
 
-        inputs.add(u);
+        //Set the itemID for the UserInput
+        userInputU.setItemId(1);
     }
 
 }

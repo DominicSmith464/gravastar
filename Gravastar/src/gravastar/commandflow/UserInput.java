@@ -1,5 +1,8 @@
 package gravastar.commandflow;
 
+
+/* A UserInput is a condensed form of the text
+   that the player puts into the entry bar.*/
 public class UserInput {
 
     private Command userCommand;
