@@ -24,7 +24,12 @@ public class StateHandler {
 
         window.colorPrintln(new String[] {"You just did the ",
                 inputs.get(inputNumber - 1).getUserCommand().toString(),
-                " command."}, new Paint[] {Color.WHITE, Color.RED, Color.WHITE});
+                " command."},
+                new Paint[] {Color.WHITE,
+                        Color.RED,
+                        Color.WHITE});
+
+        window.colorPrintln(new String[] {"I think you said ", wordList.get(0)}, new Paint[] {Color.WHITE, Color.BLUE});
 
         window.normalPrintln("");
     }
