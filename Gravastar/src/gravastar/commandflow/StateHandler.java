@@ -2,6 +2,7 @@ package gravastar.commandflow;
 
 import gravastar.characters.Player;
 import gravastar.helpers.WordParsing;
+import gravastar.rooms.Map;
 import gravastar.view.Controller;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class StateHandler {
 
             case normal:
                 //Todo: Text that happens before the entry?
+                Commands.setInput(input);
                 queryType = Query.standard;
                 break;
 
@@ -67,6 +69,16 @@ public class StateHandler {
         switch (state)
         {
             case initialize:
+                Map gameMap = new Map();
+                Commands.setMap(gameMap);
+
+                for(int i = 0; i < 7; i++)
+                {
+                    gameMap.generateRoom();
+                }
+
+                Player.setRoomId(0);
+
                 state = Gamestate.giveName;
                 break;
 
@@ -164,4 +176,5 @@ public class StateHandler {
     {
         StateHandler.window = window;
     }
+
 }

@@ -1,18 +1,20 @@
 package gravastar.commandflow;
 
 import gravastar.characters.Player;
+import gravastar.helpers.WordParsing;
 import gravastar.items.Gear;
 import gravastar.items.ItemType;
+import gravastar.rooms.Map;
+import gravastar.rooms.Room;
 import gravastar.view.Controller;
 
 public class Commands
 {
     private static Controller window;
+    private static Map map;
+    private static String input;
 
-    public static void setWindow(Controller window)
-    {
-        Commands.window = window;
-    }
+
 
     public static void selector(Command commandC)
     {
@@ -22,6 +24,7 @@ public class Commands
                 break;
 
             case travel:
+                travel();
                 break;
 
             case inspect:
@@ -66,6 +69,36 @@ public class Commands
 
     public static void look()
     {
-        Commands.window.normalPrintln("You are in ----- room.");
+        Room room = map.getRooms().get(Player.getRoomId());
+
+        Commands.window.normalPrintln(room.getName());
+        Commands.window.normalPrintln(room.getDesc());
+    }
+
+    public static void travel()
+    {
+        if(WordParsing.splitIntoWords(input).get(0).equals("e"))
+        {
+            Player.setRoomId(Player.getRoomId() + 1);
+        }
+        else if(WordParsing.splitIntoWords(input).get(0).equals("w"))
+        {
+            Player.setRoomId(Player.getRoomId() - 1);
+        }
+
+        look();
+    }
+
+    public static void setWindow(Controller window)
+    {
+        Commands.window = window;
+    }
+
+    public static void setMap(Map map) {
+        Commands.map = map;
+    }
+
+    public static void setInput(String input) {
+        Commands.input = input;
     }
 }

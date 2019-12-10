@@ -12,5 +12,6 @@ public enum ItemType
     button,
     rug,
     door,
-    window;
+    window,
+    ;
 }
