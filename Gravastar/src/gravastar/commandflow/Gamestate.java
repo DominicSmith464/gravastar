@@ -4,6 +4,6 @@ public enum Gamestate
 {
     initialize,
     normal,
-    namePlayer,
+    giveName,
     ;
 }

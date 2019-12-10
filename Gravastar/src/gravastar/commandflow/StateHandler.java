@@ -3,8 +3,6 @@ package gravastar.commandflow;
 import gravastar.characters.Player;
 import gravastar.helpers.WordParsing;
 import gravastar.view.Controller;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 import java.util.ArrayList;
 
@@ -12,12 +10,14 @@ public class StateHandler {
 
     private static ArrayList<String> wordList = new ArrayList<>();
     private static ArrayList<UserInput> inputHistory = new ArrayList<>();
+    private static Controller window;
     private static Query queryType;
-    private static Gamestate state;
+    private static Gamestate state = Gamestate.initialize;
     private static int inputNumber = 0;
 
-    public static void updateState(String input, Controller window)
+    public static void updateState(String input)
     {
+        //Prepare for input
         switch (state)
         {
             case initialize:
@@ -25,16 +25,21 @@ public class StateHandler {
                         "Welcome to Gravastar! \n" +
                                 "Hope you find your way...\n" +
                                 "\n" +
-                                "What is your name?");
-                queryType = Query.textResponse;
+                                "What is your name?\n");
+                queryType = Query.noResponse;
                 break;
 
             case normal:
-                window.normalPrintln("You are in the cafeteria.\n");
+                //Todo: Text that happens before the entry?
                 queryType = Query.standard;
+                break;
+
+            default:
+                queryType = Query.textResponse;
                 break;
         }
 
+        //Handle input
         switch (queryType)
         {
             case standard:
@@ -42,26 +47,43 @@ public class StateHandler {
                 break;
 
             case textResponse:
-                //TODO: text only
+
                 break;
 
             case itemElaboration:
                 //TODO: name an item
                 break;
 
+            case noResponse:
+                //Do nothing
+                break;
+
             default:
-                parseInput(input);
+                //Not sure what to do here
                 break;
         }
 
+        //Commit action
         switch (state)
         {
             case initialize:
-                Player.setName();
+                state = Gamestate.giveName;
+                break;
+
+            case normal:
+                Commands.selector(inputHistory.get(inputNumber - 1).getUserCommand());
+                window.normalPrintln("");
+                break;
+
+            case giveName:
+                Player.setName(input);
+                window.normalPrintln("Good luck, " + Player.getName() + ".");
+                window.normalPrintln("You wake up covered in opened ketchup packets.\n");
+                state = Gamestate.normal;
                 break;
 
             default:
-                //TODO: Send the command through the ringer
+                //What here?
                 break;
         }
 
@@ -138,4 +160,8 @@ public class StateHandler {
         userInputU.setItemId(1);
     }
 
+    public static void setWindow(Controller window)
+    {
+        StateHandler.window = window;
+    }
 }

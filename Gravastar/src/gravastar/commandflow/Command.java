@@ -5,7 +5,9 @@ public enum Command {
     travel(new String[] {"n","e","s","w"}),
     inspect(new String[] {"inspect", "look at"}),
     look(new String[] {"look"}),
-    clear(new String[] {"clear"});
+    clear(new String[] {"clear"}),
+    info(new String[] {"info"}),
+    ;
 
     private String[] aliases;
 

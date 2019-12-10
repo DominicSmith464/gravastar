@@ -13,7 +13,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import gravastar.commandflow.*;
-import java.util.ArrayList;
 
 
 public class Controller extends VBox
@@ -44,7 +43,7 @@ public class Controller extends VBox
     //Handles commands entered in the text printing context
     public void handleCommandEntered()
     {
-        String input = commandBar.getText();
+        String input = commandBar.getText().trim();
         Text t = new Text("> " + input + "\n");
         t.setFill(Color.YELLOWGREEN);
 
@@ -53,11 +52,18 @@ public class Controller extends VBox
 
         commandBar.setText("");
 
-        StateHandler.updateState(input, this);
+        StateHandler.updateState(input);
 
         //Scrolls to the bottom
         primaryTextFlow.heightProperty().addListener(observable -> primaryScrollPane.setVvalue(1.0));
 
+    }
+
+    public void initialize()
+    {
+        Commands.setWindow(this);
+        StateHandler.setWindow(this);
+        StateHandler.updateState("");
     }
 
     public void normalPrintln(String myText)
