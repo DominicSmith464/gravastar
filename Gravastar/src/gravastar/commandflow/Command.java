@@ -7,6 +7,7 @@ public enum Command {
     look(new String[] {"look"}),
     clear(new String[] {"clear"}),
     info(new String[] {"info"}),
+    sword(new String[] {"sword"})
     ;
 
     private String[] aliases;

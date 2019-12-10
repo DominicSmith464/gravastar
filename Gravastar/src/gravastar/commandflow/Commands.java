@@ -1,6 +1,8 @@
 package gravastar.commandflow;
 
 import gravastar.characters.Player;
+import gravastar.items.Gear;
+import gravastar.items.ItemType;
 import gravastar.view.Controller;
 
 public class Commands
@@ -35,6 +37,11 @@ public class Commands
 
             case info:
                 info();
+                break;
+
+            case sword:
+                Gear mySword = new Gear("sword", true, ItemType.sword, 1);
+                window.normalPrintln(mySword.toString());
                 break;
 
             default:
