@@ -16,6 +16,9 @@ public class StateHandler {
     private static Gamestate state = Gamestate.initialize;
     private static int inputNumber = 0;
 
+    private final static int NUM_ROOMS = 7;
+    private static Map gameMap;
+
     public static void updateState(String input)
     {
         //Prepare for input
@@ -70,15 +73,7 @@ public class StateHandler {
         switch (state)
         {
             case initialize:
-                Map gameMap = new Map();
-                Commands.setMap(gameMap);
-
-                for(int i = 0; i < 7; i++)
-                {
-                    gameMap.generateRoom();
-                }
-                Map.generateMap(gameMap);
-
+                generateRandomMap();
                 Player.setRoomId(0);
                 window.setRoomLabel(gameMap.getRooms().get(Player.getRoomId()).getName());
 
@@ -177,7 +172,14 @@ public class StateHandler {
 
     private static void generateRandomMap()
     {
-        
+        gameMap = new Map();
+        Commands.setMap(gameMap);
+
+        for(int i = 0; i < NUM_ROOMS; i++)
+        {
+            gameMap.generateRoom();
+        }
+        Map.generateMap(gameMap);
     }
 
     public static void setWindow(Controller window)

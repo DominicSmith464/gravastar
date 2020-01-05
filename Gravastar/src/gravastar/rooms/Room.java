@@ -4,13 +4,10 @@ import gravastar.items.Door;
 import gravastar.items.Item;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Room
 {
-    private int roomId;
-    private String name, desc, shortDesc;
-    private ArrayList<Item> roomItems = new ArrayList<>();
-
     private static final String[] ROOM_NAMES = new String[]
     {
             "Cafeteria",
@@ -24,6 +21,14 @@ public class Room
 
     //Rooms are taken when true
     private static boolean[] takenRooms = new boolean[ROOM_NAMES.length];
+
+    private int roomId;
+    private String name, desc, shortDesc;
+    private ArrayList<Item> roomItems = new ArrayList<>();
+    private ArrayList<Door> roomDoors = new ArrayList<>();
+
+    //Adds all directions to an ArrayList
+    ArrayList<Direction> validDirections = new ArrayList<>(Arrays.asList(Direction.values()));
 
     public Room(int roomId,
                 String name,
@@ -43,8 +48,10 @@ public class Room
 
     public ArrayList<Item> getRoomItems()
     {
-        return roomItems;
+        return this.roomItems;
     }
+
+    public ArrayList<Door> getRoomDoors() { return this.roomDoors; }
 
     public void addItem(Item item)
     {
@@ -63,6 +70,21 @@ public class Room
                 exitId
                 );
         this.roomItems.add(door);
+        this.roomDoors.add(door);
+        for(int i = 0; i < this.validDirections.size(); i++)
+        {
+            if(this.validDirections.get(i) == door.getDoorDirection())
+            {
+                this.validDirections.remove(i);
+                break;
+            }
+        }
+
+    }
+
+    public void addRandomDoor(int exitId)
+    {
+        
     }
 
     public static String generateName()
