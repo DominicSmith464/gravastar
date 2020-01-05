@@ -18,7 +18,7 @@ public class Map
     public static void generateMap(Map map)
     {
         map.getRooms().get(0).addDoor(Direction.east, map.getRooms().get(1).getRoomId());
-        map.getRooms().get(1).addDoor(Direction.west, map.getRooms().get(0).getRoomId());
+
     }
 
     public ArrayList<Room> getRooms()

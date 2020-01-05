@@ -71,20 +71,12 @@ public class Room
                 );
         this.roomItems.add(door);
         this.roomDoors.add(door);
-        for(int i = 0; i < this.validDirections.size(); i++)
-        {
-            if(this.validDirections.get(i) == door.getDoorDirection())
-            {
-                this.validDirections.remove(i);
-                break;
-            }
-        }
-
     }
 
     public void addRandomDoor(int exitId)
     {
-        
+        int random = (int)(Math.random() * this.validDirections.size());
+        this.addDoor(this.validDirections.remove(random), exitId);
     }
 
     public static String generateName()
