@@ -1,5 +1,6 @@
 package gravastar.rooms;
 
+import gravastar.items.Door;
 import gravastar.items.Item;
 
 import java.util.ArrayList;
@@ -48,6 +49,20 @@ public class Room
     public void addItem(Item item)
     {
         this.roomItems.add(item);
+    }
+
+    public void addDoor(Direction doorDirection, int exitId)
+    {
+        //Todo make a dynamic description based on the room it goes to maybe
+        Door door = new Door(
+                "--no name--",
+                "--room desc--",
+                true,
+                doorDirection,
+                false,
+                exitId
+                );
+        this.roomItems.add(door);
     }
 
     public static String generateName()

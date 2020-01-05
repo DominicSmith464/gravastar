@@ -11,7 +11,14 @@ public class Map
     {
         Room room = new Room(this.nextRoomId, Room.generateName(), "description", "short description");
         this.nextRoomId++;
+        //room.addDoor(Direction.north, this.nextRoomId);
         rooms.add(room);
+    }
+
+    public static void generateMap(Map map)
+    {
+        map.getRooms().get(0).addDoor(Direction.east, map.getRooms().get(1).getRoomId());
+        map.getRooms().get(1).addDoor(Direction.west, map.getRooms().get(0).getRoomId());
     }
 
     public ArrayList<Room> getRooms()

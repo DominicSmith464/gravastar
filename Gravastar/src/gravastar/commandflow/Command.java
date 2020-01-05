@@ -2,7 +2,7 @@ package gravastar.commandflow;
 
 public enum Command {
     invalid(new String[] {"invalid"}),
-    travel(new String[] {"n","e","s","w"}),
+    travel(new String[] {"north","east","south","west"}),
     inspect(new String[] {"inspect", "look at"}),
     look(new String[] {"look"}),
     clear(new String[] {"clear"}),

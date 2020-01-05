@@ -2,17 +2,24 @@ package gravastar.commandflow;
 
 import gravastar.characters.Player;
 import gravastar.helpers.WordParsing;
+import gravastar.items.Door;
 import gravastar.items.Gear;
+import gravastar.items.Item;
 import gravastar.items.ItemType;
+import gravastar.rooms.Direction;
 import gravastar.rooms.Map;
 import gravastar.rooms.Room;
 import gravastar.view.Controller;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+
+import java.util.ArrayList;
 
 public class Commands
 {
     private static Controller window;
     private static Map map;
-    private static String input;
+    private static ArrayList<String> input;
 
 
 
@@ -21,6 +28,7 @@ public class Commands
         switch(commandC)
         {
             case invalid:
+                window.colorPrintln(new String[]{input.get(0), " is not a valid verb."}, new Paint[]{Color.RED, Color.WHITE});
                 break;
 
             case travel:
@@ -43,7 +51,7 @@ public class Commands
                 break;
 
             case sword:
-                Gear mySword = new Gear("sword", true, ItemType.sword, 1);
+                Gear mySword = new Gear("sword", "It's a sword", true, ItemType.sword);
                 window.normalPrintln(mySword.toString());
                 break;
 
@@ -53,13 +61,13 @@ public class Commands
         }
     }
 
-    public static void clearHome()
+    private static void clearHome()
     {
         Commands.window.clearTextFlow();
         Commands.window.normalPrintln("Cleared all text.");
     }
 
-    public static void info()
+    private static void info()
     {
         Commands.window.normalPrintln(
                 "Your name is " +
@@ -67,25 +75,33 @@ public class Commands
                         ".");
     }
 
-    public static void look()
+    private static void look()
     {
         Room room = map.getRooms().get(Player.getRoomId());
 
-        Commands.window.normalPrintln(room.getName());
+        //Commands.window.normalPrintln(room.getName());
         Commands.window.normalPrintln(room.getDesc());
     }
 
-    public static void travel()
+    private static void travel()
     {
-        if(WordParsing.splitIntoWords(input).get(0).equals("e"))
-        {
-            Player.setRoomId(Player.getRoomId() + 1);
-        }
-        else if(WordParsing.splitIntoWords(input).get(0).equals("w"))
-        {
-            Player.setRoomId(Player.getRoomId() - 1);
-        }
+        Direction direction = Direction.getDirection(input.get(0));
 
+        for(Item door : map.getRoom(Player.getRoomId()).getRoomItems())
+        {
+            if(door.isDoor())
+            {
+                if(door.getDoorDirection() == direction)
+                {
+                    Player.setRoomId(door.getExitRoomId());
+                    window.setRoomLabel(map.getRooms().get(Player.getRoomId()).getName());
+                }
+                else
+                {
+                    Commands.window.normalPrintln("There is not a door there.");
+                }
+            }
+        }
         look();
     }
 
@@ -98,7 +114,7 @@ public class Commands
         Commands.map = map;
     }
 
-    public static void setInput(String input) {
+    public static void setInput(ArrayList<String> input) {
         Commands.input = input;
     }
 }

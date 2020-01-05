@@ -32,7 +32,6 @@ public class StateHandler {
 
             case normal:
                 //Todo: Text that happens before the entry?
-                Commands.setInput(input);
                 queryType = Query.standard;
                 break;
 
@@ -46,10 +45,12 @@ public class StateHandler {
         {
             case standard:
                 parseInput(input);
+                Commands.setInput(wordList);
                 break;
 
             case textResponse:
-
+                wordList.add(input);
+                Commands.setInput(wordList);
                 break;
 
             case itemElaboration:
@@ -76,8 +77,10 @@ public class StateHandler {
                 {
                     gameMap.generateRoom();
                 }
+                Map.generateMap(gameMap);
 
                 Player.setRoomId(0);
+                window.setRoomLabel(gameMap.getRooms().get(Player.getRoomId()).getName());
 
                 state = Gamestate.giveName;
                 break;
@@ -170,6 +173,11 @@ public class StateHandler {
 
         //Set the itemID for the UserInput
         userInputU.setItemId(1);
+    }
+
+    private static void generateRandomMap()
+    {
+        
     }
 
     public static void setWindow(Controller window)

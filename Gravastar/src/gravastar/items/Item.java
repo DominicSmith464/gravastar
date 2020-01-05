@@ -1,18 +1,30 @@
 package gravastar.items;
 
+import gravastar.rooms.Direction;
+
 public class Item
 {
-    private String name;
-    private Boolean visible;
+    private String name, desc;
+    private Boolean isVisible;
     private ItemType type;
     private int id_Number;
 
-    Item(String name, Boolean visible, ItemType type, int id_number)
+    private static int newId = 0;
+
+    Item(String name, String desc, boolean isVisible, ItemType type)
     {
         this.name = name;
-        this.visible = visible;
+        this.desc = desc;
+        this.isVisible = isVisible;
         this.type = type;
-        this.id_Number = id_number;
+        this.id_Number = Item.getNextNewId();
+    }
+
+    public static int getNextNewId()
+    {
+        int returnId = newId;
+        newId++;
+        return returnId;
     }
 
     @Override
@@ -23,5 +35,22 @@ public class Item
 
     public int getId_Number() {
         return id_Number;
+    }
+
+    public boolean isDoor()
+    {
+        return false;
+    }
+
+    public boolean isAnchored()
+    {
+        return false;
+    }
+
+    public Direction getDoorDirection() { return null; }
+
+    public int getExitRoomId()
+    {
+        return -1;
     }
 }

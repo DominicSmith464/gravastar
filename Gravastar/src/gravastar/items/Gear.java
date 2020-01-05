@@ -5,23 +5,23 @@ public class Gear extends Item
     private String prefix= "", suffix = "";
 
     public Gear(String name,
+                String desc,
                 Boolean visible,
                 ItemType type,
-                int id_number,
                 String prefix,
                 String suffix)
     {
-        super(name, visible, type, id_number);
+        super(name, desc, visible, type);
         this.prefix = prefix;
         this.suffix = suffix;
     }
 
     public Gear(String name,
+                String desc,
                 Boolean visible,
-                ItemType type,
-                int id_number)
+                ItemType type)
     {
-        super(name, visible, type, id_number);
+        super(name, desc, visible, type);
     }
 
     private static final String[] PREFIX_TITLES = new String[] {

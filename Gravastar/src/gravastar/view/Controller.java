@@ -2,6 +2,7 @@ package gravastar.view;
 
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.TilePane;
@@ -23,6 +24,7 @@ public class Controller extends VBox
     public TilePane invTilePane;
     public Rectangle awesomeRect1;
     public ScrollPane primaryScrollPane;
+    public Label roomLabel;
 
     private Paint redPaint = Paint.valueOf("red");
 
@@ -94,5 +96,10 @@ public class Controller extends VBox
     public void clearTextFlow()
     {
         primaryTextFlow.getChildren().clear();
+    }
+
+    public void setRoomLabel(String text)
+    {
+        roomLabel.setText(text);
     }
 }
