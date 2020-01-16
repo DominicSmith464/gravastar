@@ -9,7 +9,9 @@ public class Map
 
     public void generateRoom()
     {
-        Room room = new Room(this.nextRoomId, Room.generateName(), "description", "short description");
+        Room room = new Room(this.nextRoomId, Room.generateName(),
+                "--",
+                "short description");
         this.nextRoomId++;
         //room.addDoor(Direction.north, this.nextRoomId);
         rooms.add(room);
@@ -17,7 +19,12 @@ public class Map
 
     public static void generateMap(Map map)
     {
-        map.getRooms().get(0).addDoor(Direction.east, map.getRooms().get(1).getRoomId());
+        Direction lastDir;
+        for(int i = 0; i < map.getRooms().size() - 1; i++)
+        {
+            lastDir = map.getRooms().get(i).addRandomDoor(map.getRooms().get(i + 1).getRoomId());
+            map.getRooms().get(i + 1).addDoor(lastDir.getOpposite(), map.getRooms().get(i).getRoomId());
+        }
 
     }
 

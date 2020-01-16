@@ -15,6 +15,11 @@ public class Door extends Environmental
         this.exitRoomId = exitRoomId;
     }
 
+    public String toString()
+    {
+        return this.doorDirection.toString();
+    }
+
     @Override
     public boolean isDoor()
     {

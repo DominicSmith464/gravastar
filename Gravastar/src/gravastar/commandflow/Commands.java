@@ -21,8 +21,6 @@ public class Commands
     private static Map map;
     private static ArrayList<String> input;
 
-
-
     public static void selector(Command commandC)
     {
         switch(commandC)
@@ -81,27 +79,36 @@ public class Commands
 
         //Commands.window.normalPrintln(room.getName());
         Commands.window.normalPrintln(room.getDesc());
+        for(Door door : room.getRoomDoors())
+        {
+            Commands.window.normalPrintln(door.toString());
+        }
+
     }
 
     private static void travel()
     {
-        Direction direction = Direction.getDirection(input.get(0));
+        Direction direction;
+        boolean doorFound = false;
 
-        for(Item door : map.getRoom(Player.getRoomId()).getRoomItems())
+        direction = Direction.getDirection(input.get(0));
+
+        for(Door door : map.getRoom(Player.getRoomId()).getRoomDoors())
         {
-            if(door.isDoor())
+            if(door.getDoorDirection() == direction)
             {
-                if(door.getDoorDirection() == direction)
-                {
-                    Player.setRoomId(door.getExitRoomId());
-                    window.setRoomLabel(map.getRooms().get(Player.getRoomId()).getName());
-                }
-                else
-                {
-                    Commands.window.normalPrintln("There is not a door there.");
-                }
+                Player.setRoomId(door.getExitRoomId());
+                window.setRoomLabel(map.getRooms().get(Player.getRoomId()).getName());
+                doorFound = true;
+                break;
             }
         }
+
+        if(!doorFound)
+        {
+            Commands.window.normalPrintln("There is not a door there.");
+        }
+
         look();
     }
 
